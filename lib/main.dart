@@ -46,32 +46,77 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (BuildContext context, AsyncSnapshot<RemoteState> snapshot) {
             RemoteState? _newState = snapshot.data;
 
-            return Text(
-                'Âm lượng hiện tại: ${_newState?.volume}'); // update UI <=== new
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //Text('Kênh hiện tại: ${_newState?.channel}'),
+                Text('Kênh hiện tại: '),
+                Text('Âm lượng hiện tại: ${_newState?.volume}')
+              ],
+            ); // update UI <=== new
           },
         ),
       ),
-      floatingActionButton: Row(
+      floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FloatingActionButton(
-            onPressed: () {
-              bloc.eventController.sink.add(IncrementEvent(5));
-            }, // add event <=== new
-            child: Icon(Icons.volume_up),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () {
+                  // bloc.eventController.sink.add(IncrementChanelEvent(increment: 1));
+                },
+                // add event <=== new
+                child: Icon(Icons.plus_one),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  //bloc.eventController.sink.add(DecrementChannelEvent());
+                },
+                // add event <=== new
+                child: Icon(Icons.exposure_minus_1),
+              )
+            ],
           ),
-          FloatingActionButton(
-            onPressed: () {
-              bloc.eventController.sink.add(DecrementEvent(10));
-            }, // add event <=== new
-            child: Icon(Icons.volume_down),
+          SizedBox(
+            height: 10,
           ),
-          FloatingActionButton(
-            onPressed: () {
-              bloc.eventController.sink.add(MuteEvent());
-            },
-            // add event <=== new
-            child: Icon(Icons.volume_mute),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () {
+                  bloc.eventController.sink.add(IncrementEvent(5));
+                },
+                // add event <=== new
+                child: Icon(Icons.volume_up),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  bloc.eventController.sink.add(DecrementEvent(10));
+                },
+                // add event <=== new
+                child: Icon(Icons.volume_down),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  bloc.eventController.sink.add(MuteEvent());
+                },
+                // add event <=== new
+                child: Icon(Icons.volume_mute),
+              )
+            ],
           )
         ],
       ),
