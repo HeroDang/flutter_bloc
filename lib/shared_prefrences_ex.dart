@@ -5,6 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MyApp());
 
+const String KEY_IS_CLICKED = 'is_clicked';
+const String KEY_COUNTER = 'counter';
+const String KEY_MESS = 'mess';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -34,22 +38,33 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _loadCounter();
+
   }
 
   //Loading counter value on start
-  Future<void> _loadCounter() async {
-    final prefs = await SharedPreferences.getInstance();
+   _loadCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _counter = (prefs.getInt('counter') ?? 0);
+      _counter = (prefs.getInt(KEY_COUNTER) ?? 0);
     });
+
+    bool isClicked = prefs.getBool(KEY_IS_CLICKED) ?? false;
+    if (isClicked) {
+      String mess = prefs.getString(KEY_MESS) ?? '';
+
+      print(mess);
+    }
   }
 
   //Incrementing counter after click
   Future<void> _incrementCounter() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _counter = (prefs.getInt('counter') ?? 0) + 1;
-      prefs.setInt('counter', _counter);
+      _counter = (prefs.getInt(KEY_COUNTER) ?? 0) + 1;
+      prefs.setInt(KEY_COUNTER, _counter);
+
+      prefs.setBool(KEY_IS_CLICKED, true);
+      prefs.setString(KEY_MESS, 'Nut da duoc bam it nhat 1 lan');
     });
   }
 
