@@ -8,9 +8,11 @@ import 'main.dart';
 
 class Page2 extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
+
+    bloc.getCurrentState();
+
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.orangeAccent,

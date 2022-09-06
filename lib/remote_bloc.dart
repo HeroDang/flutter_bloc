@@ -3,9 +3,13 @@
 import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'remote_event.dart';
 import 'remote_state.dart';
+
+const String KEY_CURRENT_CHANNEL = 'current_channel';
+const String KEY_CURRENT_VOLUME = 'current_volume';
 
 class RemoteBloc {
   var state = RemoteState(volume: 70, channel: 1); // init giá trị khởi tạo của RemoteState. Giả sử TV ban đầu có âm lượng 70
@@ -16,6 +20,22 @@ class RemoteBloc {
 
   // 1 cái quản lý state, đảm nhận nhiệm vụ truyền state đến UI
   //final stateController = StreamController<RemoteState>();
+
+  getCurrentState () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    state.channel = (prefs.getInt(KEY_CURRENT_CHANNEL) ?? 1);
+    state.volume = (prefs.getInt(KEY_CURRENT_VOLUME) ?? 70);
+
+    stateController.sink.add(state);
+  }
+
+  saveCurrentState (RemoteState state) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt(KEY_CURRENT_CHANNEL, state.channel!);
+    prefs.setInt(KEY_CURRENT_VOLUME, state.volume!);
+  }
 
   final stateController = BehaviorSubject<RemoteState>();
 
@@ -39,6 +59,8 @@ class RemoteBloc {
       } else if (event is DecrementChannelEvent) {
         state.channel = state.channel! - event.decrement;
       }
+
+      saveCurrentState(state);
 
       // add state mới vào stateController để bên UI nhận được
       stateController.sink.add(state);

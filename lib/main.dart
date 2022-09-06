@@ -34,6 +34,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+
+    setState(() {
+      bloc.getCurrentState();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,4 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
     bloc.dispose(); // dispose bloc <=== new
   }
+
+
 }
