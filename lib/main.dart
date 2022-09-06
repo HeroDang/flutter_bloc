@@ -60,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    //Text('Kênh hiện tại: ${_newState?.channel}'),
-                    Text('Kênh hiện tại: '),
+                    Text('Kênh hiện tại: ${_newState?.channel}'),
+                    //Text('Kênh hiện tại: '),
                     Text('Âm lượng hiện tại: ${_newState?.volume}')
                   ],
                 ); // update UI <=== new
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               FloatingActionButton(
                 onPressed: () {
-                  //bloc.eventController.sink.add(IncrementChanelEvent(increment: 1));
+                  bloc.eventController.sink.add(IncrementChanelEvent(increment: 1));
                 },
                 // add event <=== new
                 child: Icon(Icons.plus_one),
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FloatingActionButton(
                 onPressed: () {
-                  //bloc.eventController.sink.add(DecrementChannelEvent());
+                  bloc.eventController.sink.add(DecrementChannelEvent());
                 },
                 // add event <=== new
                 child: Icon(Icons.exposure_minus_1),
