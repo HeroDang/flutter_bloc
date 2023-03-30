@@ -1,6 +1,5 @@
 class RemoteState {
-  RemoteState({this.volume, this.channel});
+  RemoteState(this.volume);
 
-  int? volume;
-  int? channel;
+  final int volume;
 }
