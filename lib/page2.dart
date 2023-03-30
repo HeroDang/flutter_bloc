@@ -31,8 +31,8 @@ class Page2 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Text('Kênh hiện tại: ${_newState?.channel}'),
-                Text('Kênh hiện tại: '),
+                Text('Kênh hiện tại: ${_newState?.channel}'),
+                // Text('Kênh hiện tại: '),
                 Text('Âm lượng hiện tại: ${_newState?.volume}')
               ],
             ); // update UI <=== new
@@ -47,7 +47,7 @@ class Page2 extends StatelessWidget {
             children: <Widget>[
               FloatingActionButton(
                 onPressed: () {
-                  // bloc.eventController.sink.add(IncrementChanelEvent(incrementChanel: 1));
+                  bloc.eventController.sink.add(IncrementChanelEvent(1));
                 },
                 // add event <=== new
                 child: Icon(Icons.plus_one),
@@ -57,7 +57,7 @@ class Page2 extends StatelessWidget {
               ),
               FloatingActionButton(
                 onPressed: () {
-                  // bloc.eventController.sink.add(DecrementChanelEvent(decrementChanel: 1));
+                  bloc.eventController.sink.add(DecrementChanelEvent(1));
                 },
                 // add event <=== new
                 child: Icon(Icons.exposure_minus_1),
