@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:rxdart/rxdart.dart';
+
 import 'remote_event.dart';
 import 'remote_state.dart';
 
@@ -11,7 +13,7 @@ class RemoteBloc {
   final eventController = StreamController<RemoteEvent>();
 
   // 1 cái quản lý state, đảm nhận nhiệm vụ truyền state đến UI
-  final stateController = StreamController<RemoteState>();
+  final stateController = BehaviorSubject<RemoteState>();
 
   RemoteBloc() {
     // lắng nghe khi eventController push event mới
