@@ -9,7 +9,7 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // bloc.getCurrentState();
+    bloc.getCurrentState();
 
     // TODO: implement build
     return Scaffold(

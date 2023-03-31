@@ -3,6 +3,7 @@ import 'package:flutter18_bloc/page2.dart';
 import 'package:flutter18_bloc/remote_bloc.dart';
 import 'package:flutter18_bloc/remote_event.dart';
 import 'package:flutter18_bloc/remote_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final bloc = RemoteBloc(); // khởi tạo bloc  <=== new
 
@@ -35,6 +36,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    setState(() {
+      bloc.getCurrentState();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
